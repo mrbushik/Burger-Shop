@@ -1,9 +1,42 @@
-import React from "react";
+import Link from "next/link";
+import Image from "next/image";
+import styles from "../../styles/Burgers.module.css";
 
-const burger = () => {
+export const getStaticProps = async () => {
+  const res = await fetch("http://localhost:5000/items");
+  const data = await res.json();
+  return {
+    props: { burgers: data },
+  };
+};
+
+const burger = ({ burgers }) => {
+  console.log(burgers);
   return (
     <div>
       <h1>Our burgers</h1>
+      {burgers.map((burger) => (
+        <Link
+          href={`/burgers/${burger.id}`}
+          key={burger.id}
+          className={styles.burgerCard}
+        >
+          <div className={styles.imageContainer}>
+            <Image
+              src={`${burger.image}`}
+              alt={`${burger.name}`}
+              width={100}
+              height={100}
+              layout="responsive"
+              objectFit="cover"
+            />
+          </div>
+          <div>
+            <h3>{burger.name}</h3>
+            <p>{burger.desc}</p>
+          </div>
+        </Link>
+      ))}
     </div>
   );
 };
