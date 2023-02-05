@@ -11,7 +11,6 @@ export const getStaticProps = async () => {
 };
 
 const burger = ({ burgers }) => {
-  console.log(burgers);
   return (
     <div>
       <h1>Our burgers</h1>
@@ -25,10 +24,8 @@ const burger = ({ burgers }) => {
             <Image
               src={`${burger.image}`}
               alt={`${burger.name}`}
-              width={100}
-              height={100}
-              layout="responsive"
-              objectFit="cover"
+              width={150}
+              height={150}
             />
           </div>
           <div>
